@@ -26,21 +26,29 @@ class Cart extends React.Component {
     	if(items.size == 0) {
     		//return <h3>No Data</h3>;
     	}
+
 		let prices = items.map(item=>{
     		return parseInt(item.price);
     	});
     	let totalPrices = prices.reduce((a,b)=>a+b);
+
     	items = items.map((e, index)=>{
     		return <Item handleDelete={(e, id)=>this.deleteItemFromCart(e, id)} key={index} text={e.text} price={e.price} id={e.id}></Item>
-    	})
+    	});
+
         return <div id="cart" className="panel panel-default">
-        <div className="panel-heading">
-        <h3>Cart - {items.size}</h3>
-        </div>
-        <div className="panel-body">
-        {items.size?items:<p>add</p>}
-        Total {totalPrices}
-        </div>
+        	<div className="panel-heading">
+        		Cart {items.size?items.size+' items':'is empty'}
+        	</div>
+        	<div className="panel-body">
+        		<table>
+        			<thead style={items.size?{}:{display:'none'}}><tr><th>Order</th><th>Price</th></tr></thead>
+        			<tbody>{items}</tbody>
+        			<tfoot>
+        				<tr><td colSpan="2"><strong>{totalPrices?"$"+totalPrices.toFixed(2):""}</strong></td></tr>
+        			</tfoot>
+        		</table>
+        	</div>
         </div>;
     }
 }
@@ -54,9 +62,10 @@ class Item extends React.Component {
     	this.props.handleDelete(e, this.props.id);
     }
     render() {
-        return <li>
-    		{this.props.id}: {this.props.text} - {this.props.price} <button onClick={(e)=>this.onDelete(e)}>Delete</button>
-  			</li>;
+        return <tr className="cart-item">
+    		<td><a href="#" onClick={(e)=>this.onDelete(e)}>&#10005;</a><span>{this.props.text}</span></td>
+    		<td><strong>${this.props.price.toFixed(2)}</strong></td> {/* <button onClick={(e)=>this.onDelete(e)}>Delete</button>*/}
+  			</tr>;
     }
 }
 

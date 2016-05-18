@@ -2,6 +2,34 @@
 	position: absolute;
 	right: 0;
 	top: 0;
+	text-align: left;
+	th {
+		line-height: 2.5;
+	}
+	th:last-child,td:last-child {
+		text-align: right;
+	}
+	.cart-item {
+		margin-bottom: .5em;
+		&:last-of-type{
+			margin-bottom: 1em;
+		}
+
+		td {
+			padding-bottom: 1em;
+			&:first-of-type {
+		    	padding-right: 3em;
+		    }
+		}
+
+		span{
+			padding-left: 10px;
+			//float:left;
+		}
+		button {
+			//float:right;
+		}
+	}
 }
 
 .panel {

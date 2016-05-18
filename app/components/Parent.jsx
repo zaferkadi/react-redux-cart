@@ -43,8 +43,10 @@ class Parent extends React.Component {
     return (
         <div>
           <h1>Products</h1>          
-          <div className="row"> {products}</div> 
+          <div className="row"> {products}</div>
+        {/*
           <div className="total"><div className="ib ib--hl">Total</div><div className="ib ib--hr">${this.state.total.toFixed(2)}</div></div>
+          */}
           <div><Cart/></div>
         </div>);
   }

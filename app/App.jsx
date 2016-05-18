@@ -17,6 +17,9 @@ class App extends React.Component {
     store.dispatch(addProduct({id:2, text: 'Product B', price: 220}));
     store.dispatch(addProduct({id:3, text: 'Product C', price: 70}));
     store.dispatch(addProduct({id:4, text: 'Product D', price: 90}));
+    store.dispatch(addProduct({id:5, text: 'Product E', price: 45}));
+    store.dispatch(addProduct({id:6, text: 'Product F', price: 67}));
+    store.dispatch(addProduct({id:7, text: 'Product G', price: 30}));
     //store.dispatch(addCart({ price: 90,text: 'D'}));
     // store.dispatch({
     //   type: 'ADD_PRODUCT',
