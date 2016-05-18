@@ -1,4 +1,4 @@
-# Carts Example - ReactJS + Redux
+# ShoppingCart Example - ReactJS + Redux
 
 A simple react-redux shopping cart example
 
