@@ -63,8 +63,9 @@ class Item extends React.Component {
     }
     render() {
         return <tr className="cart-item">
-    		<td><a href="#" onClick={(e)=>this.onDelete(e)}>&#10005;</a><span>{this.props.text}</span></td>
-    		<td><strong>${this.props.price.toFixed(2)}</strong></td> {/* <button onClick={(e)=>this.onDelete(e)}>Delete</button>*/}
+    		<td><span>{this.props.text}</span></td>
+    		<td><strong>${this.props.price.toFixed(2)}</strong></td>
+    		<td><a href="#" onClick={(e)=>this.onDelete(e)}>&#10005;</a></td> {/* <button onClick={(e)=>this.onDelete(e)}>Delete</button>*/}
   			</tr>;
     }
 }
