@@ -3,42 +3,29 @@ import { connect } from 'react-redux';
 import {removeCart} from '../redux/actions.jsx';
 import style from './Cart.scss';
 import store from '../redux/store.jsx';
+import fontAwesome from 'font-awesome/scss/font-awesome.scss';
 class Cart extends React.Component {
     constructor(props) {
         super(props);
         this.displayName = 'Cart';
-        //this.state = {cart:[]};
-        
-  //       store.subscribe(()=> {
-  //   		console.log('store_0 has been updated. Latest store state:', store.getState());
-  //   		//this.state.cart = store.getState().cart;
-  //   	// Update your views here
-		// });
-        //this.state.cart = {};
     }
-    deleteItemFromCart(e,id){
-    	// alert('hy');
-    	//console.log(id);
+    deleteItemFromCart(e,id){    	
     	this.props.dispatch(removeCart(id));
     }
     render() {
     	var items = this.props.cart
-    	if(items.size == 0) {
-    		//return <h3>No Data</h3>;
-    	}
 
-		let prices = items.map(item=>{
+		let totalPrices = items.map(item=>{
     		return parseInt(item.price);
-    	});
-    	let totalPrices = prices.reduce((a,b)=>a+b);
+    	}).reduce((a,b)=>a+b);
 
     	items = items.map((e, index)=>{
-    		return <Item handleDelete={(e, id)=>this.deleteItemFromCart(e, id)} key={index} text={e.text} price={e.price} id={e.id}></Item>
+    		return <Item onClick={(e, id)=>this.deleteItemFromCart(e, id)} key={index} text={e.text} price={e.price} id={e.id}></Item>
     	});
 
         return <div id="cart" className="panel panel-default">
         	<div className="panel-heading">
-        		Cart {items.size?items.size+' items':'is empty'}
+        		<h3>Cart <span>{items.size?items.size+' items':'is empty'}</span></h3>
         	</div>
         	<div className="panel-body">
         		<table>
@@ -53,35 +40,26 @@ class Cart extends React.Component {
     }
 }
 
+
 class Item extends React.Component {
-    constructor(props) {
-        super(props);
-        this.displayName = 'Item';
-    }
-    onDelete(e) {    	
-    	this.props.handleDelete(e, this.props.id);
-    }
     render() {
         return <tr className="cart-item">
-    		<td><span>{this.props.text}</span></td>
-    		<td><strong>${this.props.price.toFixed(2)}</strong></td>
-    		<td><a href="#" onClick={(e)=>this.onDelete(e)}>&#10005;</a></td> {/* <button onClick={(e)=>this.onDelete(e)}>Delete</button>*/}
-  			</tr>;
+  <td><span>{this.props.text}</span></td>
+  <td><strong>${this.props.price.toFixed(2)}</strong></td>
+  <td><a href="#" onClick={(e,id)=>this.props.onClick(e, this.props.id)}><i className="fa fa-trash" aria-hidden="true"></i></a></td> 
+  </tr>;
     }
 }
 
 
 // const Item = ({ onClick, price, text, id }) => (
-//   <li onClick={onClick} >
-//     {id}: {text} - {price}
-//   </li>
+//   <tr className="cart-item">
+//   <td><span>{text}</span></td>
+//   <td><strong>${price.toFixed(2)}</strong></td>
+//   <td><a href="#" onClick={()=>onClick()}><i className="fa fa-trash" aria-hidden="true"></i></a></td> 
+//   </tr>
 // )
 
-// Item.propTypes = {
-//   onClick: PropTypes.func.isRequired,
-//   price: PropTypes.number.isRequired,
-//   text: PropTypes.string.isRequired
-// }
 export default Cart;
 
 // This is our select function that will extract from the state the data slice we want to expose

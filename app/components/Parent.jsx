@@ -1,11 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Child from './Child.jsx';
-
 import ParentStyle from './Parent.scss';
 import store from '../redux/store.jsx';
 import {addProduct,addCart} from '../redux/actions.jsx';
 import Cart from './Cart.jsx';
+import fontAwesome from 'font-awesome/scss/font-awesome.scss';
+
+
 class Parent extends React.Component {
   constructor(props) {
     super(props);
@@ -42,7 +44,7 @@ class Parent extends React.Component {
 
     return (
         <div>
-          <h1>Products</h1>          
+          <h1>Products</h1>
           <div className="row"> {products}</div>
         {/*
           <div className="total"><div className="ib ib--hl">Total</div><div className="ib ib--hr">${this.state.total.toFixed(2)}</div></div>
@@ -62,20 +64,27 @@ class Item extends React.Component {
 
   handleClick(e) {
     
-    var active = !this.state.active;      
-    this.setState({active: active});
-
     store.dispatch(addCart({id:this.props.id,price:this.props.price, text:this.props.children}));
     this.props.addTotal( active? this.props.price : -this.props.price );
   }
-
+  handleLike(e){
+    var active = !this.state.active;      
+    this.setState({active: active});
+  }
   render() {
-      return <div className={" col-lg-3 "+(this.state.active?'active':'')}>
-      <div className="item x">
-      <h3>{this.props.children}</h3>
-      <p>${this.props.price.toFixed(2)}</p>
-      <button onClick={e=>this.handleClick(e)}>Add to cart</button>
-      </div>
+      return <div className="col-lg-3 col-md-4">
+              <div className="product">
+                <div className="product__info">
+                  <div className="fa fa-glass img"></div>
+                  <h3 className="product__title">{this.props.children}</h3>      
+                  <div className="product__price">${this.props.price.toFixed(2)}</div>
+                    <a className="action-a" onClick={e=>this.handleClick(e)}>
+                      <i className="fa fa-cart-plus" aria-hidden="true"></i>
+                      <span>Add to cart</span>
+                    </a>
+                </div>
+                <i className={"fa fa-heart like "+ (this.state.active?'active':'')} onClick={e=>this.handleLike(e)}/>
+              </div>              
       </div>;
   }
 }
