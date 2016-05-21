@@ -1,4 +1,4 @@
-import * as types from './constants.jsx';
+import * as types from './constants.js';
 
 
 
@@ -16,6 +16,13 @@ export  function addCart(cart) {
 		cart
 	}
 }
+export  function filterProductsBy(filter) {
+	//console.log(cart);
+	return {
+		type: types.FILTER_BY,
+		filter
+	}
+}
 export function removeCart(id) {
 	//console.log(cart);
 	return {
@@ -23,6 +30,8 @@ export function removeCart(id) {
 		id
 	}
 }
+
+
 
 // module.exports = {
 // 	addProduct: addProduct,

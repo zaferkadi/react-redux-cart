@@ -1,6 +1,6 @@
 import React,{PropTypes} from 'react';
 import { connect } from 'react-redux';
-import {removeCart} from '../redux/actions.jsx';
+import {removeCart} from '../redux/actions.js';
 import style from './Cart.scss';
 import store from '../redux/store.jsx';
 import fontAwesome from 'font-awesome/scss/font-awesome.scss';
@@ -15,9 +15,9 @@ class Cart extends React.Component {
     render() {
     	var items = this.props.cart
 
-		let totalPrices = items.map(item=>{
+		var totalPrices =items.length? items.map(item=>{
     		return parseInt(item.price);
-    	}).reduce((a,b)=>a+b);
+    	}).reduce((a,b)=>a+b):0;
 
     	items = items.map((e, index)=>{
     		return <Item onClick={(e, id)=>this.deleteItemFromCart(e, id)} key={index} text={e.text} price={e.price} id={e.id}></Item>
@@ -25,7 +25,7 @@ class Cart extends React.Component {
 
         return <div id="cart" className="panel panel-default">
         	<div className="panel-heading">
-        		<h3>Cart <span>{items.size?items.size+' items':'is empty'}</span></h3>
+        		<h3>Cart {items.size?items.size+' items':'is empty'}</h3>
         	</div>
         	<div className="panel-body">
         		<table>
