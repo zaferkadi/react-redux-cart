@@ -44,12 +44,7 @@ class ItemContainer extends React.Component {
     console.log('/');
     console.log(this.props.reduxState);
     console.log('//');
-    // var filter = this.props.activeFilter.trim().toLowerCase();    
-    // if(filter.length > 0) {
-    //   products = products.filter((e, index)=>{
-    //     return e.type.toLowerCase().match(filter);
-    //   });
-    // }
+
     products = products.map((e, index) => {
       return <Item key={index} id={e.id} price={e.price} addTotal={e=>this.addTotal(e)} images={e.images}>{e.text}</Item>;
     });
@@ -57,7 +52,7 @@ class ItemContainer extends React.Component {
     return (
         <div>
           <h1>Products</h1>
-          <Filter onSelect={(e,v)=>this.changeFilter(e,v)}/>
+          <Filter onSelect={(e,v)=>this.changeFilter(e,v)} activeFilter={this.props.activeFilter}/>
           <div className="rowX products"> {products}</div>
         {/*
           <div className="total"><div className="ib ib--hl">Total</div><div className="ib ib--hr">${this.state.total.toFixed(2)}</div></div>
@@ -71,9 +66,9 @@ class ItemContainer extends React.Component {
 class Filter extends React.Component {
     render() {
         return <ul className="filter-list">
-      <li><a href="#" onClick={e=>this.props.onSelect(e,'all')}>All</a></li>
-      <li><a href="#" onClick={e=>this.props.onSelect(e,'shoe')}>Shoes</a></li>
-      <li><a href="#" onClick={e=>this.props.onSelect(e,'shirt')}>Shirts</a></li>
+      <li className={this.props.activeFilter == 'all'?'active':''}><a href="#" onClick={e=>this.props.onSelect(e,'all')}>All</a></li>
+      <li className={this.props.activeFilter == 'shoe'?'active':''} ><a href="#" onClick={e=>this.props.onSelect(e,'shoe')}>Shoes</a></li>
+      <li className={this.props.activeFilter == 'shirt'?'active':''} ><a href="#" onClick={e=>this.props.onSelect(e,'shirt')}>Shirts</a></li>
     </ul>;
     }
 }
@@ -100,27 +95,29 @@ class Item extends React.Component {
   }
   render() {
 
-      return <div className="col-lg-3-col-md-4 p grid-item">
-              <div className="product">
+      return (<div className="product">
                 <div className="product__info">
                   <div className="img">                    
-                    <img src={'/dist/products/product'+this.props.id+'/'+this.props.images[this.state.activeColorID]}/>
+                    <img src={'dist/products/product'+this.props.id+'/'+this.props.images[this.state.activeColorID]}/>
                   </div>
-                  <h3 className="product__title">{this.props.children}</h3>      
-                  <div className="product__price">${this.props.price.toFixed(2)}</div>
+                  
                   <ul className="product__colors">
                   {this.props.images.map((image,index)=>{
-                    return <li key={index} className={this.state.activeColorID==index?'active':''} onClick={(e)=>this.selectColor(e,index)}><img src={'/dist/products/product'+this.props.id+'/'+image}/></li>
+                    return <li key={index} className={this.state.activeColorID==index?'active':''} onClick={(e)=>this.selectColor(e,index)}><img src={'dist/products/product'+this.props.id+'/'+image}/></li>
                   })}
                   </ul>
                     <a className="action-a" onClick={e=>this.handleClick(e)}>
                       <i className="fa fa-cart-plus" aria-hidden="true"></i>
-                      <span>Add to cart</span>
+                      
                     </a>
+                </div>
+                <div className="product__meta">
+                <h3 className="product__title">{this.props.children}</h3>      
+                <span className="product__price">${this.props.price.toFixed(2)}</span>
                 </div>
                 <i className={"fa fa-heart like "+ (this.state.liked?'active':'')} onClick={e=>this.handleLike(e)}/>
               </div>              
-      </div>;
+      );
   }
 }
 

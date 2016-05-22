@@ -23,20 +23,25 @@ class Cart extends React.Component {
     		return <Item onClick={(e, id)=>this.deleteItemFromCart(e, id)} key={index} text={e.text} price={e.price} id={e.id}></Item>
     	});
 
-        return <div id="cart" className="panel panel-default">
-        	<div className="panel-heading">
-        		<h3>Cart {items.size?items.size+' items':'is empty'}</h3>
+        return <div id="cart">
+        <div className="notification">
+            <i className="fa fa-cart-arrow-down" style={{fontSize:'2em'}} aria-hidden="true"></i>
+            <span>{items.length}</span>
+        </div>
+        <div className="panel panel-default">
+        	<div className="panel-heading">            
+        	   <h3>Cart {items.length?items.length+' items':'is empty'}</h3>
         	</div>
         	<div className="panel-body">
         		<table>
-        			<thead style={items.size?{}:{display:'none'}}><tr><th>Order</th><th>Price</th></tr></thead>
+        			<thead style={items.length?{}:{display:'none'}}><tr><th>Order</th><th>Price</th></tr></thead>
         			<tbody>{items}</tbody>
         			<tfoot>
         				<tr><td colSpan="2"><strong>{totalPrices?"$"+totalPrices.toFixed(2):""}</strong></td></tr>
         			</tfoot>
         		</table>
         	</div>
-        </div>;
+        </div></div>;
     }
 }
 

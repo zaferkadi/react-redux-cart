@@ -13,24 +13,18 @@ class App extends React.Component {
   }
   render() {
     //console.log(addProduct);
-    for( var i = 1 ; i<20; i++) {
-      //store.dispatch(addProduct({id:i, text: 'Product '+i, type:'shoes', price: 110,images:['p1.png','p2.png','p3.png']}));  
-    }
     
-    store.dispatch(addProduct({id:1, text: 'Product A', type:'shirt', price: 110,images:['p1.png','p2.png','p3.png']}));
-    store.dispatch(addProduct({id:2, text: 'Product B', type:'shirt', price: 220,images:['p1.png','p2.png','p3.png']}));
-    store.dispatch(addProduct({id:3, text: 'Product C', type:'shirt', price: 70,images:['p1.png','p2.png','p3.png']}));
-    store.dispatch(addProduct({id:4, text: 'Product D', type:'shoe', price: 90,images:['p1.png','p2.png','p3.png']}));
-    store.dispatch(addProduct({id:5, text: 'Product E', type:'shoe', price: 45,images:['p1.png','p2.png','p3.png']}));
-    store.dispatch(addProduct({id:6, text: 'Product F', type:'shoe', price: 67,images:['p1.png','p2.png','p3.png']}));
-    store.dispatch(addProduct({id:7, text: 'Product G', type:'shoe', price: 30,images:['p1.png','p2.png','p3.png']}));
-    {/*
-    store.dispatch(addCart({ price: 90,text: 'D'}));
-     store.dispatch({
-      type: 'ADD_PRODUCT',
-      product: {text: 'A', price: 110}
-    });
-    */}
+      
+    let data  = require('./data.js');
+    console.log(data);
+    for (var i = 0; i < data.length ; i++) {
+      let prodName = 'Product '+Math.random().toString(32).substr(2,5);
+      data[i].text = prodName;
+      data[i].price = parseInt(Math.random().toString(10).substring(2,4));
+      store.dispatch(addProduct(data[i]));
+    }
+    //store.dispatch(addProduct({id:1, text: prodName, type:'shirt', price: 110,images:['p1.png','p2.png','p3.png']}));
+            
     //console.log(store.getState());
     /*const products = List([
       Map({text:"A", price: 120}),

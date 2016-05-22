@@ -2,11 +2,12 @@
 
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var path = require('path');
+var webpack = require('webpack');
 
 module.exports = {
     entry: './app/main.jsx',
     output: {
-        path: path.resolve(__dirname, "dist"),
+        path: path.resolve(__dirname, "app/dist"),
         publicPath: "/app/dist/",
         filename: 'index.js'
     },
@@ -33,5 +34,8 @@ module.exports = {
             loader: 'url'
         }]
     },
-    plugins: [new ExtractTextPlugin("style.css")]
+    plugins: [new ExtractTextPlugin("style.css"),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: { warnings: false }
+    })]
 };

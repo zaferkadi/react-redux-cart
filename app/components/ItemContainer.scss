@@ -1,5 +1,6 @@
 $color-1 :#24252A;
 $color-2: #CECECE;
+$color-3: #797BED;
 
 body {
     margin: 0 auto;
@@ -25,24 +26,45 @@ body {
 .filter-list {
     list-style-type: none;
     padding: 0;
+    margin-bottom: 1.3em;
     li {
         display: inline;
         padding: 1em 1em;
         background-color: $color-1;
         margin: 0 1em;
+        &.active {
+            background-color: white;
+        }
     }
 }
 .product {
-    padding:1.5em 2em 1.5em 2em;
-    background-color: $color-1; 
+    //padding:1.5em 2em 1.5em 2em;
+    padding-bottom: 1.5em;
     min-height: 100px;
     margin: .5em;
     position: relative;
+    .action-a {
+        //background-color: #123;
+        position: absolute;
+        top:0;
+        left:0;
+        padding: 1em;
+        display: block;
+        color: #fff;
+        cursor: pointer;
+        &:hover,&:focus {
+            transition: .5s;
+            text-decoration: none;
+            background-color: lighten(#123, 20%);
+            color:white;
 
+        }
+    }
     i.like {
         position: absolute;
-        top: 10px;
-        right: 10px;
+        padding: 1em;
+        top: 0;
+        right: 0;
         cursor: pointer;
         &.active {
             color: red;
@@ -56,6 +78,7 @@ body {
     }
 
     &__info {
+        background-color: $color-1; 
         img {
             width: 100%;
             height: auto;
@@ -66,12 +89,20 @@ body {
         }
     }
     &__title {
-        font-size :150%;
+        text-align: left;
+        margin: 0;
 
     }
+    &__meta {
+        position: relative;
+    }
     &__price {
-        padding: 1em 0;
-        color: #797BED;
+
+        position: absolute;
+        right: 0;
+        top:0;
+
+        color: $color-3;
         font-weight: bold;
     }
     &__colors{
@@ -84,14 +115,18 @@ body {
             padding:5px;
             margin: 5px;
             &.active {
-                border-color: #797BED;
+                border-color: $color-3;
             }
         }
     }
     i + span {
         margin-left: 1em;
     }
-
+    &:hover .action-a{
+        transition:.5s;
+        -webkit-animation: swing 0.6s forwards;
+        color: $color-3;
+    }
     &:hover .img {
         //-webkit-animation: swing 0.6s forwards; 
     }
@@ -113,20 +148,7 @@ body {
         -webkit-transform: rotate3d(0, 0, 1, 0deg);
     }
 }
-.action-a {
-    background-color: #123;
-    padding: 1em;
-    display: block;
-    color: #fff;
-    cursor: pointer;
-    &:hover,&:focus {
-        transition: .5s;
-        text-decoration: none;
-        background-color: lighten(#123, 20%);
-        color:white;
 
-    }
-}
 // ul {
 //     list-style: none;
 //     margin: 0;
