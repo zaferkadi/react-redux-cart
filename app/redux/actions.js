@@ -17,6 +17,7 @@ export  function addCart(cart) {
 	}
 }
 export  function filterProductsBy(filter) {
+	console.log('filterBy', filter);
 	//console.log(cart);
 	return {
 		type: types.FILTER_BY,

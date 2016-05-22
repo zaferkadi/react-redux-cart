@@ -14,7 +14,7 @@ class ItemContainer extends React.Component {
     super(props);
     //const {data} = props;
     this.displayName = 'ItemContainer';
-    this.state= {total: 0, filterBy: ''};
+    this.state= {total: 0, _filterBy: ''};
   }
   componentWillMount() {    
     //this.state.products =store.getState().products;
@@ -24,21 +24,32 @@ class ItemContainer extends React.Component {
     this.setState({total: this.state.total + price});
   }
   changeFilter(e, filter){
-    //this.props.dispatch(filterProductsBy(filter));
-    this.setState({filterBy:filter=='all'?'':filter})
+    this.props.dispatch(filterProductsBy(filter));
+  }
+  filterProducts() {
+    console.log(this.props.activeFilter);
+    switch(this.props.activeFilter) {
+      case 'all':
+        return this.props.products;
+      default:
+        let products =  this.props.products.filter((e, index)=>{
+          return e.type.toLowerCase().match(this.props.activeFilter);
+        });
+        return products;
+    }
   }
   render() {
 
-    var products = this.props.products;
+    var products = this.filterProducts();//this.props.products;
     console.log('/');
     console.log(this.props.reduxState);
     console.log('//');
-    var filter = this.state.filterBy.trim().toLowerCase();    
-    if(filter.length > 0) {
-      products = products.filter((e, index)=>{
-        return e.type.toLowerCase().match(filter);
-      });
-    }
+    // var filter = this.props.activeFilter.trim().toLowerCase();    
+    // if(filter.length > 0) {
+    //   products = products.filter((e, index)=>{
+    //     return e.type.toLowerCase().match(filter);
+    //   });
+    // }
     products = products.map((e, index) => {
       return <Item key={index} id={e.id} price={e.price} addTotal={e=>this.addTotal(e)} images={e.images}>{e.text}</Item>;
     });
@@ -119,6 +130,7 @@ export default ItemContainer;
 const mapStateToProps = (state/*, props*/) => {
   return {
     products: state.products,
+    activeFilter: state.activeFilter,
     // It is very bad practice to provide the full state like that (reduxState: state) and it is only done here
     // for you to see its stringified version in our page. More about that here:
     // https://github.com/rackt/react-redux/blob/v4.0.0/docs/api.md#inject-dispatch-and-every-field-in-the-global-state
