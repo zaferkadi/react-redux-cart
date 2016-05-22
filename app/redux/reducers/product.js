@@ -1,10 +1,5 @@
 import * as types from '../constants.js';
 
-// let initialState = {
-//   filterBy :'',
-//   products:[]
-// }
-
 module.exports = (state = [], action) =>{	
   //console.log(state);
 	switch(action.type){

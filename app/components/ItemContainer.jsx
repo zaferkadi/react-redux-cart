@@ -16,10 +16,6 @@ class ItemContainer extends React.Component {
     this.displayName = 'ItemContainer';
     this.state= {total: 0, _filterBy: ''};
   }
-  componentWillMount() {    
-    //this.state.products =store.getState().products;
-    //this.props.dispatch(addProduct({text: 'A', price: 110}));
-  }
   addTotal(price){
     this.setState({total: this.state.total + price});
   }
@@ -69,6 +65,7 @@ class Filter extends React.Component {
       <li className={this.props.activeFilter == 'all'?'active':''}><a href="#" onClick={e=>this.props.onSelect(e,'all')}>All</a></li>
       <li className={this.props.activeFilter == 'shoe'?'active':''} ><a href="#" onClick={e=>this.props.onSelect(e,'shoe')}>Shoes</a></li>
       <li className={this.props.activeFilter == 'shirt'?'active':''} ><a href="#" onClick={e=>this.props.onSelect(e,'shirt')}>Shirts</a></li>
+      <li className={this.props.activeFilter == 'jacket'?'active':''} ><a href="#" onClick={e=>this.props.onSelect(e,'jacket')}>Jackets</a></li>
     </ul>;
     }
 }
