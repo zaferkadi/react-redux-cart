@@ -57,12 +57,13 @@ class ItemContainer extends React.Component {
     return (
         <div>
           <h1>Products</h1>
+          <Filter onSelect={(e,v)=>this.changeFilter(e,v)}/>
           <div className="rowX products"> {products}</div>
         {/*
           <div className="total"><div className="ib ib--hl">Total</div><div className="ib ib--hr">${this.state.total.toFixed(2)}</div></div>
           */}
           <Cart/>
-          <Filter onSelect={(e,v)=>this.changeFilter(e,v)}/>
+          
         </div>);
   }
 }
