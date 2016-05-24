@@ -2,7 +2,6 @@ import * as types from '../constants.js';
 //const defaultState =[];// new Immutable.List();
 
 module.exports = (state = [], action) =>{
-  //console.log(state);
   switch(action.type){
     case types.ADD_CART:
       return state.concat(action.cart);

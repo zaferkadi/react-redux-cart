@@ -34,8 +34,8 @@ module.exports = {
             loader: 'url'
         }]
     },
-    plugins: [new ExtractTextPlugin("style.css"),
+    plugins: [new ExtractTextPlugin("style.css")/*,
     new webpack.optimize.UglifyJsPlugin({
       compress: { warnings: false }
-    })]
+    })*/]
 };

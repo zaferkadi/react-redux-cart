@@ -1,5 +1,5 @@
 import React from 'react';
-import ItemContainer from './components/ItemContainer.jsx';
+import ProductContainer from './components/ProductContainer.jsx';
 //import {Map,List} from 'immutable';
 import store from './redux/store.jsx';
 import {addProduct,addCart} from './redux/actions.js';
@@ -14,9 +14,17 @@ class App extends React.Component {
   render() {
     //console.log(addProduct);
     
-      
+    // let next = store.dispatch;
+    // store.dispatch = function(action) {
+    //   console.log("Action ",action);
+    //   console.log("State before ", store.getState());
+    //   let result = next(action);
+    //   console.log("State after ", store.getState());
+    //   return result;
+
+    // }
     let data  = require('./data.js');
-    console.log(data);
+    //console.log(data);
     for (var i = 0; i < data.length ; i++) {
       let prodName = 'Product '+Math.random().toString(32).substr(2,5);
       data[i].text = prodName;
@@ -33,7 +41,7 @@ class App extends React.Component {
       Map({text:"C", price: 360})
     ]);*/
     //var products = [{text:"A", price: 120},{text:"B", price: 150}, {text:"C", price: 360}, {text:"D", price: 130}];
-    return <div><Provider store={store}><ItemContainer/></Provider></div>;
+    return <div><Provider store={store}><ProductContainer/></Provider></div>;
     }
   }
   

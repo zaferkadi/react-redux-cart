@@ -4,12 +4,14 @@ import {removeCart} from '../redux/actions.js';
 import style from './Cart.scss';
 import store from '../redux/store.jsx';
 import fontAwesome from 'font-awesome/scss/font-awesome.scss';
+import Item from './CartItem.jsx';
+
 class Cart extends React.Component {
     constructor(props) {
         super(props);
         this.displayName = 'Cart';
     }
-    deleteItemFromCart(e,id){    	
+    deleteItemFromCart(event,id){
     	this.props.dispatch(removeCart(id));
     }
     render() {
@@ -19,8 +21,8 @@ class Cart extends React.Component {
     		return parseInt(item.price);
     	}).reduce((a,b)=>a+b):0;
 
-    	items = items.map((e, index)=>{
-    		return <Item onClick={(e, id)=>this.deleteItemFromCart(e, id)} key={index} text={e.text} price={e.price} id={e.id}></Item>
+    	items = items.map((item, index)=>{
+    		return <Item onClick={(e, id)=>this.deleteItemFromCart(e, id)} key={index} {...item}  ></Item>
     	});
 
         return <div id="cart">
@@ -46,22 +48,11 @@ class Cart extends React.Component {
 }
 
 
-class Item extends React.Component {
-    render() {
-        return <tr className="cart-item">
-  <td><span>{this.props.text}</span></td>
-  <td><strong>${this.props.price.toFixed(2)}</strong></td>
-  <td><a href="#" onClick={(e,id)=>this.props.onClick(e, this.props.id)}><i className="fa fa-trash" aria-hidden="true"></i></a></td> 
-  </tr>;
-    }
-}
-
-
 // const Item = ({ onClick, price, text, id }) => (
 //   <tr className="cart-item">
 //   <td><span>{text}</span></td>
 //   <td><strong>${price.toFixed(2)}</strong></td>
-//   <td><a href="#" onClick={()=>onClick()}><i className="fa fa-trash" aria-hidden="true"></i></a></td> 
+//   <td><a href="#" onClick={(e)=>onClick(e,id)}><i className="fa fa-trash" aria-hidden="true"></i></a></td> 
 //   </tr>
 // )
 

@@ -1,8 +1,12 @@
 import {applyMiddleware , createStore} from 'redux';
-import ReduxThunk from 'redux-thunk';
+//import thunk from 'redux-thunk';
+import createLogger from 'redux-logger';
+import promise from 'redux-promise';
+import reducers from './reducers/index.js';
+
 //import {cartReducer, productReducer} from './reducers.jsx';
 
-// The Reducer Function
+// The Reducersction
 
 //var createStoreWithMiddleware = applyMiddleware();
 
@@ -16,7 +20,7 @@ import ReduxThunk from 'redux-thunk';
 
 //const store = createStore(userReducer, [], enhancer);
 // let store = createStore(reducers);
-
-let store = createStore(require('./reducers/index.js'));
+const logger = createLogger();
+const store = createStore(reducers, applyMiddleware( promise, logger));
 //const store = createStoreWithMiddleware(reducers);
 export default store;
